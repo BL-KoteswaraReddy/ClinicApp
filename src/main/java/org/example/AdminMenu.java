@@ -25,10 +25,29 @@ public class AdminMenu
         switch (input)
         {
             case Doctor_Entry: registerDoctor(scanner); break;
-            case Bulk_Entry: break;
+            case Bulk_Entry: bulkEntry(scanner); break;
             case View_Audit_Logs: break;
             case Display_Doctors: displayDoctors();break;
             case Logout: break;
+        }
+    }
+
+    private static void bulkEntry(Scanner scanner) {
+        System.out.println("Enter the full path of the CSV file(e.g doctors.cv)");
+        String filePath = scanner.nextLine();
+
+        //call the FileHandler to get the list
+        ArrayList<Doctor> uploadList = FileHandler.bulkLoadDoctor(filePath, counterID);
+        if(!uploadList.isEmpty())
+        {
+            doctorList.addAll(uploadList);//add all new doctors to our main list
+            counterID+= uploadList.size(); //update our Global id
+            System.out.println(" Success " +uploadList.size() + " Doctors uploaded");
+
+        }
+        else
+        {
+            System.out.println("Upload failed or file was empty.");
         }
     }
 

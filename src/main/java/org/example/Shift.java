@@ -1,7 +1,7 @@
 package org.example;
 
 public enum Shift {
-    MORNIG,
+    MORNING,
     EVENING,
     BOTH;
 }
