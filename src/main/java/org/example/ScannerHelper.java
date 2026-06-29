@@ -26,11 +26,14 @@ public class ScannerHelper {
 
     }
 
-    public static int readIntWithPrompt(Scanner scanner, String pleaseEnterDoc1Experience)
+    public static int readIntWithPrompt(Scanner scanner, String message)
     {
-        System.out.println(pleaseEnterDoc1Experience);
-        int input = scanner.nextInt();
-        return input;
+        while (true) {
+            System.out.println(message);
+            int input = scanner.nextInt();
+            scanner.nextLine();
+            return input;
+        }
     }
 
     //Display Enum constants as a numbered list and returns the selection.
@@ -53,5 +56,25 @@ public class ScannerHelper {
         }
             System.out.println("Invalid input please try again");
        }
+    }
+
+    public static long readLongWithPrompt(Scanner scanner, String message) {
+        System.out.println(message);
+        return scanner.nextLong();
+    }
+
+    public static String readMobileNumber(Scanner scanner, String prompt) {
+        String mobileRegex = "^[6-9]\\d{9}$";
+        while (true)
+        {
+            System.out.println(prompt);
+            String input = scanner.nextLine().trim();
+            if(input.matches(mobileRegex))
+                return input;
+            else
+            {
+                System.out.println("Invalid mobile numbers must starts with 9, 8, 7 or 6");
+            }
+        }
     }
 }
