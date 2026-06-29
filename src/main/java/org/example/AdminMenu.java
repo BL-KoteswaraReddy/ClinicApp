@@ -1,4 +1,5 @@
 package org.example;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -10,21 +11,8 @@ public class AdminMenu
     public static final int Display_Doctors = 4;
     public static final int Logout = 5;
 
-    public static String doc1Name="";
-    public static String doc1Spec="";
-    public static String doc1Shift="";
-    public static int doc1Exp = 0;
-
-    public static String doc2Name="";
-    public static String doc2Spec="";
-    public static String doc2Shift="";
-    public static int doc2Exp = 0;
-
-    public static String doc3Name="";
-    public static String doc3Spec="";
-    public static String doc3Shift="";
-    public static int doc3Exp = 0;
-
+    private static ArrayList<Doctor> doctorList = new ArrayList<>();
+    private static int counterID = 1;
 
 
     public static void displayAdminOptions(Scanner scanner)
@@ -45,35 +33,23 @@ public class AdminMenu
     }
 
     private static void registerDoctor(Scanner scanner) {
-        doc1Name = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 name: ");
-        doc1Spec = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 Specialization: ");
-        doc1Shift = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 slots");
-        doc1Exp = ScannerHelper.readIntWithPrompt(scanner, "Please enter Doc1 experience");
+        System.out.println("Registering new Doctor");
+        String generatedID = String.format("D%04d", counterID++);
+
+        System.out.println("Please enter Details for Doctor :"+generatedID);
+        String docName = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 name: ");
+        String docSpec = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 Specialization: ");
+        int docExp = ScannerHelper.readIntWithPrompt(scanner, "Please enter Doc1 experience");
+        String docShift = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 slots");
+        Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
+        doctorList.add(doctor);
+        System.out.println("Doctor added successfully with ID : "+generatedID);
     }
+
 
     public static void displayDoctors()
     {
-        System.out.println("\n Clinic : Registered Doctors");
-        if(doc1Name.isEmpty() && doc2Name.isEmpty() && doc3Name.isEmpty())
-        {
-            System.out.println("No Doctors are registered");
-        }
-
-        if(!doc1Name.isEmpty())
-        {
-//            System.out.println("Doctor 1 Name: "+doc1Name);
-//            System.out.println("Doctor 1 specialization: "+doc1Spec);
-//            System.out.println("Doctor 1 Experience: "+doc1Exp);
-//            System.out.println("Doctor 1 Shift: "+doc1Shift);
-            System.out.println("ID D001: | Name: "+doc1Name +" | spec :"+doc1Spec+ " | Exp :"+doc1Exp+" | Shift: "+doc1Shift);
-        }
-        if(!doc2Name.isEmpty()){
-            System.out.println("ID D002: | Name: "+doc2Name +" | spec :"+doc2Spec+ " | Exp :"+doc2Exp+" | Shift: "+doc2Shift);
-        }
-        if(!doc3Name.isEmpty()){
-            System.out.println("ID D003: | Name: "+doc3Name +" | spec :"+doc3Spec+ " | Exp :"+doc3Exp+" | Shift: "+doc3Shift);
-    }
-
+        System.out.println(doctorList);
     }
 
 }
