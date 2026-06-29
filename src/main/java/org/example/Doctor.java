@@ -3,11 +3,11 @@ package org.example;
 public class Doctor {
     private String id;
     private String name;
-    private String specialization;
+    private Specialization specialization;
     private int experience;
-    private String shift;
+    private Shift shift;
 
-    public Doctor(String id, String name, String specialization, int experience, String shift) {
+    public Doctor(String id, String name, Specialization specialization, int experience, Shift shift) {
         this.id = id;
         this.name = name;
         this.specialization = specialization;

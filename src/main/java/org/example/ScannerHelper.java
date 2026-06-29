@@ -32,4 +32,26 @@ public class ScannerHelper {
         int input = scanner.nextInt();
         return input;
     }
+
+    //Display Enum constants as a numbered list and returns the selection.
+    public static <T extends Enum<T>> T readEnumChoice(Scanner scanner, T[] values)
+    {
+        /*
+       values the array of enum constants
+       @return The selected enum constant
+         */
+        while (true)
+        {
+        for(int i=0; i<values.length; i++)
+        {
+            System.out.println((i+1) + ". "+values[i]);
+        }
+        int choice = readIntWithPrompt(scanner, "Select choice (Number):");
+        if(choice>0 && choice<values.length)
+        {
+            return values[choice-1];
+        }
+            System.out.println("Invalid input please try again");
+       }
+    }
 }

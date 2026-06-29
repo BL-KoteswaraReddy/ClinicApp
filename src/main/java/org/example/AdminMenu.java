@@ -38,9 +38,9 @@ public class AdminMenu
 
         System.out.println("Please enter Details for Doctor :"+generatedID);
         String docName = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 name: ");
-        String docSpec = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 Specialization: ");
+        Specialization docSpec = ScannerHelper.readEnumChoice(scanner, Specialization.values());
         int docExp = ScannerHelper.readIntWithPrompt(scanner, "Please enter Doc1 experience");
-        String docShift = ScannerHelper.readStrWithPrompt(scanner, "Please enter Doc1 slots");
+        Shift docShift = ScannerHelper.readEnumChoice(scanner,  Shift.values());
         Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
         doctorList.add(doctor);
         System.out.println("Doctor added successfully with ID : "+generatedID);
