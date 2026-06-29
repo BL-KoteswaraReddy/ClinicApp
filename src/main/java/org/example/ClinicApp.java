@@ -23,7 +23,7 @@ public class ClinicApp {
             int roleChoice = ScannerHelper.readIntegerInput(scanner);
             switch (roleChoice)
             {
-                case ROLE_ADMIN:AdminMenu.showMenu(scanner); break;
+                case ROLE_ADMIN:AdminMenu.displayAdminOptions(scanner); break;
                 case ROLE_FRONT_DESK:FrontDeskMenu.showExecutiveMenu(scanner); break;
                 case EXIT_SYSTEM:
                     System.out.println("Shutting Down Clinic Ops app......Good Bye");
