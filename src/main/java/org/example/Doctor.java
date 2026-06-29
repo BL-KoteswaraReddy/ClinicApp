@@ -7,6 +7,26 @@ public class Doctor {
     private int experience;
     private Shift shift;
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Specialization getSpecialization() {
+        return specialization;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
+
     public Doctor(String id, String name, Specialization specialization, int experience, Shift shift) {
         this.id = id;
         this.name = name;

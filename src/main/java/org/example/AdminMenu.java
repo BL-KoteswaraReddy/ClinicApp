@@ -37,7 +37,7 @@ public class AdminMenu
         String filePath = scanner.nextLine();
 
         //call the FileHandler to get the list
-        ArrayList<Doctor> uploadList = FileHandler.bulkLoadDoctor(filePath, counterID);
+        ArrayList<Doctor> uploadList = FileHandler.bulkLoadDoctor(filePath, counterID, doctorList);
         if(!uploadList.isEmpty())
         {
             doctorList.addAll(uploadList);//add all new doctors to our main list
