@@ -83,22 +83,13 @@ public class FrontDeskMenu {
         //2.identify slot
         String requestedTime = ScannerHelper.selectSlotFromList(scanner);
         //3.Find an Available doctor
-        ArrayList<Doctor> doctorList = AdminMenu.getDoctorList();
-       // System.out.println("Doctors list: "+doctorList);
-        Doctor assignedDoctor = null;
-        System.out.println("Requested Time is "+requestedTime);
-        System.out.println("reaching appointment method");
-        for(Doctor d: doctorList ) {
-            boolean checkDoctor = d.isSlotFree(requestedTime);
-        //    System.out.println("Checked doctor :"+checkDoctor);
-            if (checkDoctor) {
-                boolean specExist = specExist("CHILD_SPECIALIST");
-                if(specExist) {
-                    assignedDoctor = d;
-                    break; //Stop at the first doctor who is free
-                }
-            }
-        }
+        Doctor assignedDoctor = AdminMenu.getDoctorList()
+                .stream()
+            .filter(d ->d.getSpecialization().toString().equalsIgnoreCase("CHILD_SPECIALIST"))
+            .filter(d ->d.isShiftCompatability("BOTH"))
+            .filter(d->ScannerHelper.isSlotAvailable("11:00 AM"))
+            .findAny()
+            .orElse(null);
         System.out.println("Assigned Doctor :"+assignedDoctor);
             if(assignedDoctor != null)
             {
@@ -111,22 +102,5 @@ public class FrontDeskMenu {
             {
                 System.out.println("Doctors are not available in this slot :"+requestedTime);
             }
-    }
-
-    public static boolean specExist(String requiredSpec)
-    {
-     try {
-         ArrayList<Doctor> allDoctors = AdminMenu.getDoctorList();
-         Specialization spec = Specialization.valueOf(requiredSpec.trim().toUpperCase());
-         boolean specExist = allDoctors.stream().anyMatch(d -> d.getSpecialization() == spec);
-         return specExist;
-     }
-     catch (IllegalArgumentException i)
-     {
-         System.out.println("No such specialist is present in that doctors list");
-         System.out.println("Try with different name");
-
-     }
-     return false;
     }
 }

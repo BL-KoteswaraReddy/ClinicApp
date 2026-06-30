@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Doctor {
     private String id;
@@ -60,4 +61,12 @@ public class Doctor {
     {
         bookedSlots.add(requestTime);
     }
+
+
+    public boolean isShiftCompatability(String shift)
+    {
+        return shift.equalsIgnoreCase(getShift().toString());
+    }
+
+
 }

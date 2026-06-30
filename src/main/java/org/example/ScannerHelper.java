@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ScannerHelper {
@@ -91,4 +92,10 @@ public class ScannerHelper {
         int choice = readIntWithPrompt(scanner, "select slot from the list");
         return allSlots[choice-1];
     }
+
+    public static boolean isSlotAvailable(String requiredSlot)
+    {
+        return Arrays.stream(allSlots).anyMatch(slot -> slot.equalsIgnoreCase(requiredSlot));
+    }
+
 }
