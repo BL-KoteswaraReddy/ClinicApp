@@ -1,11 +1,16 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Doctor {
     private String id;
     private String name;
     private Specialization specialization;
     private int experience;
     private Shift shift;
+
+    private ArrayList<String>  bookedSlots = new ArrayList<>();
+
 
     public String getId() {
         return id;
@@ -44,5 +49,15 @@ public class Doctor {
                 ", experience='" + experience + '\'' +
                 ", shift='" + shift + '\'' +
                 '}';
+    }
+
+   public boolean isSlotFree(String requestTime)
+    {
+        return !bookedSlots.contains(requestTime);
+    }
+
+    public void bookSlot(String requestTime)
+    {
+        bookedSlots.add(requestTime);
     }
 }

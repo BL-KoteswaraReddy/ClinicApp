@@ -71,4 +71,7 @@ public class AdminMenu
         System.out.println(doctorList);
     }
 
+    public static ArrayList<Doctor> getDoctorList() {
+        return doctorList;
+    }
 }

@@ -3,6 +3,10 @@ package org.example;
 import java.util.Scanner;
 
 public class ScannerHelper {
+
+    public static final String[] allSlots = {"09:00 AM", "09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM",
+        "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM", "6:00 PM", "06:30 PM"
+        };
     public static int readIntegerInput(Scanner scanner)
     {
         try {
@@ -76,5 +80,15 @@ public class ScannerHelper {
                 System.out.println("Invalid mobile numbers must starts with 9, 8, 7 or 6");
             }
         }
+    }
+
+    public static String selectSlotFromList(Scanner scanner) {
+        System.out.println("Available slots");
+        for (int i=0; i< allSlots.length; i++)
+        {
+            System.out.println(allSlots[i]);
+        }
+        int choice = readIntWithPrompt(scanner, "select slot from the list");
+        return allSlots[choice-1];
     }
 }
