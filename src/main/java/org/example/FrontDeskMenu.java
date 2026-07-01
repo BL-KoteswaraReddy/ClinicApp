@@ -56,12 +56,13 @@ public class FrontDeskMenu {
             Patient patient = new Patient(patientId, name, gender, age, number);
             patientList.add(patient);
             System.out.println("Patient Registered successfully");
-            AuditLogger.log("Patient Registered successfully"+patient.getName(), "Info");
+            AuditLogger.log("Patient Registered successfully: \n Patient Name :"+patient.getName(), LogLevel.INFO);
         }
         else
         {
             System.out.println("Record found : The patient already Registered");
             System.out.println(patientData);
+            AuditLogger.log("Registration cancelled to avoid duplication: \n Patient Name:"+patientData.getName()+"\n mobile Number :"+patientData.getMobileNumber(), LogLevel.WARNING);
             System.out.println("Registration cancelled to avoid duplication");
             return;
         }
@@ -96,7 +97,7 @@ public class FrontDeskMenu {
                 assignedDoctor.bookSlot(requestedTime);
                 Appointment newAppointment = new Appointment(patientData, assignedDoctor, requestedTime);
                 appointmentList.add(newAppointment);
-                AuditLogger.log("Appointment successfull", "INFO");
+                AuditLogger.log("Appointment successfull", LogLevel.INFO);
                 System.out.println("Success : DR. "+assignedDoctor.getName() +"assigned for "+requestedTime);
             }
             else

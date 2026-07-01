@@ -19,7 +19,7 @@ public class AuditLogger
 
     }
 
-    public static void log(String message, String level) {
+    public static void log(String message, LogLevel level) {
         AuditLog auditLog = new AuditLog(LocalDateTime.now(), message, level);
         logs.add(auditLog);
     }

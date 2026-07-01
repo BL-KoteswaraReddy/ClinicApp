@@ -34,12 +34,13 @@ public class FileHandler {
                         if(duplicate)
                         {
                             System.out.println("Duplicate Doctor :"+name);
+                            AuditLogger.log("Duplicate Doctor ", LogLevel.WARNING);
                         }
                         else {
                             Doctor doctor = new Doctor(id, name, specialization, exp, shift);
                             newDoctors.add(doctor);
                             doctorList.add(doctor);
-                            AuditLogger.log("Doctor added successfully", "InfoInfo");
+                            AuditLogger.log("Doctor added successfully  \n Doctor Name: "+doctor.getName()+", \n specialization :"+doctor.getSpecialization(), LogLevel.INFO);
                         }
                     }
                 } catch (Exception e) {
@@ -53,6 +54,7 @@ public class FileHandler {
         catch (Exception e)
         {
             System.out.println(" Bulk Upload  Error : Check file format or Enum values :"+e.getMessage());
+            AuditLogger.log("Bulk Upload Error", LogLevel.ERROR);
         }
         return newDoctors;
     }

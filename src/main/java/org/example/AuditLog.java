@@ -6,20 +6,21 @@ import java.time.LocalDateTime;
 public class AuditLog
 {
     private LocalDateTime localDateTime;
-    private String level;
+    private LogLevel level;
     private String message;
 
-    public AuditLog(LocalDateTime localDateTime, String level, String message) {
+    public AuditLog(LocalDateTime localDateTime, String message, LogLevel level) {
         this.localDateTime = localDateTime;
-        this.level = level;
         this.message = message;
+        this.level = level;
+
     }
 
     public LocalDateTime getLocalDateTime() {
         return localDateTime;
     }
 
-    public String getLevel() {
+    public LogLevel getLevel() {
         return level;
     }
 

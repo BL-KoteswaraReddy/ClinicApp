@@ -33,7 +33,7 @@ public class AdminMenu
     }
 
     private static void bulkEntry(Scanner scanner) {
-        System.out.println("Enter the full path of the CSV file(e.g doctors.cv)");
+        System.out.println("Enter the full path of the CSV file(e.g doctors.csv)");
         String filePath = scanner.nextLine();
 
         //call the FileHandler to get the list
@@ -42,7 +42,7 @@ public class AdminMenu
         {
             doctorList.addAll(uploadList);//add all new doctors to our main list
             counterID+= uploadList.size(); //update our Global id
-            AuditLogger.log(uploadList.size()+"Doctors uploaded", "Info");
+            AuditLogger.log(uploadList.size()+"Doctors uploaded", LogLevel.INFO);
             System.out.println(" Success " +uploadList.size() + " Doctors uploaded");
 
         }
@@ -63,7 +63,7 @@ public class AdminMenu
         Shift docShift = ScannerHelper.readEnumChoice(scanner,  Shift.values());
         Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
         doctorList.add(doctor);
-        AuditLogger.log("Doctor Added successfully", "");
+        AuditLogger.log("Doctor Added successfully \n ID :"+doctor.getId()+" Name:"+doctor.getName()+" \n Specialization: ", LogLevel.INFO);
         System.out.println("Doctor added successfully with ID : "+generatedID);
     }
 
