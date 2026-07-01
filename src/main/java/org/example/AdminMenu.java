@@ -63,7 +63,7 @@ public class AdminMenu
         Shift docShift = ScannerHelper.readEnumChoice(scanner,  Shift.values());
         Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
         doctorList.add(doctor);
-        AuditLogger.log("Doctor Added successfully \n ID :"+doctor.getId()+" Name:"+doctor.getName()+" \n Specialization: ", LogLevel.INFO);
+        AuditLogger.log("Doctor Added successfully \n ID :"+doctor.getId()+" Name:"+doctor.getName()+" \n Specialization: "+doctor.getSpecialization(), LogLevel.INFO);
         System.out.println("Doctor added successfully with ID : "+generatedID);
     }
 

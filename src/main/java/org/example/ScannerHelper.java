@@ -70,15 +70,21 @@ public class ScannerHelper {
 
     public static String readMobileNumber(Scanner scanner, String prompt) {
         String mobileRegex = "^[6-9]\\d{9}$";
+        int invalidInput = 0;
         while (true)
         {
             System.out.println(prompt);
             String input = scanner.nextLine().trim();
             if(input.matches(mobileRegex))
                 return input;
-            else
-            {
+
+                invalidInput++;
                 System.out.println("Invalid mobile numbers must starts with 9, 8, 7 or 6");
+                AuditLogger.log("Invalid Mobile Number ", LogLevel.WARNING);
+            if(invalidInput>3)
+            {
+                    AuditLogger.log("Security Alert :"
+                    +invalidInput+" Invalid mobile attempts ", LogLevel.ERROR);
             }
         }
     }
