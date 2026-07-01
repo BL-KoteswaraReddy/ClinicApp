@@ -56,7 +56,7 @@ public class FrontDeskMenu {
             Patient patient = new Patient(patientId, name, gender, age, number);
             patientList.add(patient);
             System.out.println("Patient Registered successfully");
-
+            AuditLogger.log("Patient Registered successfully"+patient.getName(), "Info");
         }
         else
         {
@@ -96,6 +96,7 @@ public class FrontDeskMenu {
                 assignedDoctor.bookSlot(requestedTime);
                 Appointment newAppointment = new Appointment(patientData, assignedDoctor, requestedTime);
                 appointmentList.add(newAppointment);
+                AuditLogger.log("Appointment successfull", "INFO");
                 System.out.println("Success : DR. "+assignedDoctor.getName() +"assigned for "+requestedTime);
             }
             else

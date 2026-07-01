@@ -26,7 +26,7 @@ public class AdminMenu
         {
             case Doctor_Entry: registerDoctor(scanner); break;
             case Bulk_Entry: bulkEntry(scanner); break;
-            case View_Audit_Logs: break;
+            case View_Audit_Logs: AuditLogger.displayLogs(); break;
             case Display_Doctors: displayDoctors();break;
             case Logout: break;
         }
@@ -42,6 +42,7 @@ public class AdminMenu
         {
             doctorList.addAll(uploadList);//add all new doctors to our main list
             counterID+= uploadList.size(); //update our Global id
+            AuditLogger.log(uploadList.size()+"Doctors uploaded", "Info");
             System.out.println(" Success " +uploadList.size() + " Doctors uploaded");
 
         }
@@ -62,6 +63,7 @@ public class AdminMenu
         Shift docShift = ScannerHelper.readEnumChoice(scanner,  Shift.values());
         Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
         doctorList.add(doctor);
+        AuditLogger.log("Doctor Added successfully", "");
         System.out.println("Doctor added successfully with ID : "+generatedID);
     }
 

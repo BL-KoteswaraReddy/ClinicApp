@@ -39,6 +39,7 @@ public class FileHandler {
                             Doctor doctor = new Doctor(id, name, specialization, exp, shift);
                             newDoctors.add(doctor);
                             doctorList.add(doctor);
+                            AuditLogger.log("Doctor added successfully", "InfoInfo");
                         }
                     }
                 } catch (Exception e) {
