@@ -1,12 +1,16 @@
 package org.example;
 
 import com.opencsv.CSVReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
 public class FileHandler {
+
+    public static Logger logger = LogManager.getLogger(FileHandler.class);
 
     public static ArrayList<Doctor> bulkLoadDoctor(String filePath, int startId, ArrayList<Doctor> doctorList) {
         ArrayList<Doctor> newDoctors = new ArrayList<>();
@@ -34,13 +38,13 @@ public class FileHandler {
                         if(duplicate)
                         {
                             System.out.println("Duplicate Doctor :"+name);
-                            AuditLogger.log("Duplicate Doctor ", LogLevel.WARNING);
+                            logger.warn("Duplicate Doctor ");
                         }
                         else {
                             Doctor doctor = new Doctor(id, name, specialization, exp, shift);
                             newDoctors.add(doctor);
                             doctorList.add(doctor);
-                            AuditLogger.log("Doctor added successfully  \n Doctor Name: "+doctor.getName()+", \n specialization :"+doctor.getSpecialization(), LogLevel.INFO);
+                            logger.info("Doctor added successfully  \n Doctor Name: "+doctor.getName()+", \n specialization :"+doctor.getSpecialization());
                         }
                     }
                 } catch (Exception e) {
@@ -54,7 +58,7 @@ public class FileHandler {
         catch (Exception e)
         {
             System.out.println(" Bulk Upload  Error : Check file format or Enum values :"+e.getMessage());
-            AuditLogger.log("Bulk Upload Error", LogLevel.ERROR);
+            logger.error("Bulk Upload Error");
         }
         return newDoctors;
     }

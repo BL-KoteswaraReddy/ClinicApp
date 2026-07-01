@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +13,8 @@ public class FrontDeskMenu {
     public static final int Logout = 4;
 
     public static int counterId = 1;
+
+    public static Logger logger = LogManager.getLogger(FrontDeskMenu.class);
 
     private static  ArrayList<Patient> patientList = new ArrayList<>();
     private static ArrayList<Appointment> appointmentList = new ArrayList<>();
@@ -56,13 +61,13 @@ public class FrontDeskMenu {
             Patient patient = new Patient(patientId, name, gender, age, number);
             patientList.add(patient);
             System.out.println("Patient Registered successfully");
-            AuditLogger.log("Patient Registered successfully: \n Patient Name :"+patient.getName(), LogLevel.INFO);
+            logger.info("Patient Registered successfully: \n Patient Name :"+patient.getName());
         }
         else
         {
             System.out.println("Record found : The patient already Registered");
             System.out.println(patientData);
-            AuditLogger.log("Registration cancelled to avoid duplication: \n Patient Name:"+patientData.getName()+"\n mobile Number :"+patientData.getMobileNumber(), LogLevel.WARNING);
+            logger.warn("Registration cancelled to avoid duplication: \n Patient Name:"+patientData.getName()+"\n mobile Number :"+patientData.getMobileNumber());
             System.out.println("Registration cancelled to avoid duplication");
             return;
         }
@@ -97,7 +102,7 @@ public class FrontDeskMenu {
                 assignedDoctor.bookSlot(requestedTime);
                 Appointment newAppointment = new Appointment(patientData, assignedDoctor, requestedTime);
                 appointmentList.add(newAppointment);
-                AuditLogger.log("Appointment successfull", LogLevel.INFO);
+                logger.info("Appointment successfull");
                 System.out.println("Success : DR. "+assignedDoctor.getName() +"assigned for "+requestedTime);
             }
             else

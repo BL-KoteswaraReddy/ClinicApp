@@ -1,18 +1,24 @@
 package org.example;
+import org.apache.commons.logging.LogFactory;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class AdminMenu
 {
     public static final int Doctor_Entry  = 1;
     public static final int Bulk_Entry = 2;
-    public static final int View_Audit_Logs = 3;
     public static final int Display_Doctors = 4;
     public static final int Logout = 5;
 
     private static ArrayList<Doctor> doctorList = new ArrayList<>();
     private static int counterID = 1;
+
+    public static Logger logger = LogManager.getLogger(AdminMenu.class);
+
 
 
     public static void displayAdminOptions(Scanner scanner)
@@ -26,7 +32,6 @@ public class AdminMenu
         {
             case Doctor_Entry: registerDoctor(scanner); break;
             case Bulk_Entry: bulkEntry(scanner); break;
-            case View_Audit_Logs: AuditLogger.displayLogs(); break;
             case Display_Doctors: displayDoctors();break;
             case Logout: break;
         }
@@ -42,7 +47,7 @@ public class AdminMenu
         {
             doctorList.addAll(uploadList);//add all new doctors to our main list
             counterID+= uploadList.size(); //update our Global id
-            AuditLogger.log(uploadList.size()+"Doctors uploaded", LogLevel.INFO);
+            logger.info("Uploaded Doctor");
             System.out.println(" Success " +uploadList.size() + " Doctors uploaded");
 
         }
@@ -63,10 +68,9 @@ public class AdminMenu
         Shift docShift = ScannerHelper.readEnumChoice(scanner,  Shift.values());
         Doctor doctor = new Doctor(generatedID, docName, docSpec, docExp, docShift);
         doctorList.add(doctor);
-        AuditLogger.log("Doctor Added successfully \n ID :"+doctor.getId()+" Name:"+doctor.getName()+" \n Specialization: "+doctor.getSpecialization(), LogLevel.INFO);
+        logger.info("Doctor Added successfully \n ID :"+doctor.getId()+" Name:"+doctor.getName()+" \n Specialization: "+doctor.getSpecialization());
         System.out.println("Doctor added successfully with ID : "+generatedID);
     }
-
 
     public static void displayDoctors()
     {

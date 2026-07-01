@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,6 +11,9 @@ public class ScannerHelper {
     public static final String[] allSlots = {"09:00 AM", "09:00 AM", "10:00 AM", "10:30 AM", "11:00 AM",
         "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM", "6:00 PM", "06:30 PM"
         };
+
+    public static Logger logger = LogManager.getLogger(ScannerHelper.class);
+
     public static int readIntegerInput(Scanner scanner)
     {
         try {
@@ -80,11 +86,11 @@ public class ScannerHelper {
 
                 invalidInput++;
                 System.out.println("Invalid mobile numbers must starts with 9, 8, 7 or 6");
-                AuditLogger.log("Invalid Mobile Number ", LogLevel.WARNING);
+                logger.info("Invalid Mobile Number ");
             if(invalidInput>3)
             {
-                    AuditLogger.log("Security Alert :"
-                    +invalidInput+" Invalid mobile attempts ", LogLevel.ERROR);
+                    logger.error("Security Alert :"
+                    +invalidInput+" Invalid mobile attempts ");
             }
         }
     }
